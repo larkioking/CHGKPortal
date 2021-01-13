@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <a class="navbar-brand" href="#">Hidden brand</a>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+
+                <div class="dropdown" sec:authorize="${hasAuthority('adminpanel:crud')}">
+                    <button type="button" class="btn btn-light dropdown-toggle" id="navBarAdminPanelLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Administration
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="navBarAdminPanelLink">
+                        <a class="dropdown-item" href="/admin/users">Users</a>
+                    </div>
+                </div>
+
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        Dropdown link
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Logging menu !-->
+            <div class="dropdown" sec:authorize="!isFullyAuthenticated()">
+                <button type="button" class="btn btn-light dropdown-toggle" id="navBarLoginMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Authorization
+                </button>
+
+                <div class="dropdown-menu">
+                    <form th:action="@{/}" method="POST" class="px-4 py-3">
+                        <div th:if="${param.error}" class="alert alert-warning">
+                            Invalid username/password!
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input name="username" type="text" class="form-control" id="email" placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="dropdownCheck" disabled>
+                            <label class="form-check-label" for="dropdownCheck">
+                                Remember me
+                            </label>
+                        </div>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <button type="submit" class="btn btn-outline-primary btn-block mt-2" >Sign in</button>
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/registration">New around here? Sign up</a>
+                    <a class="dropdown-item" href="#">Forgot password?</a>
+                </div>
+            </div>
+
+
+            <div sec:authorize="isFullyAuthenticated()">
+                <form th:action="@{/logout}" method="POST">
+                    <button type="submit" class="btn btn-light">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+</html>
+
+<!-- Search form
+
+<form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+!-->

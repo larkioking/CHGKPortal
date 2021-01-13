@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+    <h3>User Form</h3>
+    <hr>
+
+    <form th:action="@{/admin/updateUser}" th:object="${user}" method="POST">
+
+        <input type="hidden" th:field="${user.id}">
+        <input type="hidden" th:field="${user.password}">
+        <input type="hidden" th:field="${user.userProfile.email}">
+
+
+        <input type="text" th:field="${user.email}" class="form-control-plaintext" placeholder="" >
+        <input type="text" th:field="${user.status}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.role}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.lastName}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.firstName}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.macId}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.country}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.city}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.vkLink}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.fbLink}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.tgLink}" class="form-control-plaintext" placeholder="">
+        <input type="text" th:field="${user.userProfile.twLink}" class="form-control-plaintext" placeholder="">
+
+        <button type="submit" class="btn btn-info">Save</button>
+    </form>
+
+    <hr>
+    <a th:href="@{/admin/users}">Back to Users</a>
+</div>
+
+</body>
+</html>
