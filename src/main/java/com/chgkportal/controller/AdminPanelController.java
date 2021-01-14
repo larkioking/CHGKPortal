@@ -42,8 +42,13 @@ public class AdminPanelController {
 
     @PostMapping("/updateUser")
     public String updateUser(@ModelAttribute("user") User user) {
-        System.out.println(user.toString());
         userRepository.save(user);
         return "redirect:/admin/users";
+    }
+
+    @GetMapping("/userAddForm")
+    public String showFormToAddUser(Model model) {
+        model.addAttribute("newUser", new User());
+        return "redirect:/registration";
     }
 }
