@@ -3,9 +3,11 @@ package com.chgkportal.service;
 import com.chgkportal.entity.UserProfile;
 import com.chgkportal.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserProfileServiceImpl implements UserProfileService {
 
     private final UserProfileRepository userProfileRepository;
@@ -21,7 +23,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public UserProfile findByEmail(String email) {
+    public Optional<UserProfile> findByEmail(String email) {
         return userProfileRepository.findByEmail(email);
     }
 

@@ -18,6 +18,7 @@ public class User {
     private UserProfile userProfile;
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 

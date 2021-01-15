@@ -216,7 +216,9 @@
                 <h4 class="mb-3">Обязательная информация</h4>
                 <hr>
 
-                <form th:action="@{/cre}" th:object="${newUser}" method="POST" class="align-content-center">
+                <form th:action="@{registration/createUser}" th:object="${newUser}" method="POST" class="align-content-center">
+
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <div class="col">
                         <label for="firstName" class="form-label">Имя</label>
                         <input th:field="${newUser.userProfile.firstName}" type="text" class="form-control" id="firstName" placeholder="Иван" required="required">

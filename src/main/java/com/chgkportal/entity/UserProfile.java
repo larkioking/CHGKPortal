@@ -11,12 +11,11 @@ import javax.persistence.*;
 @Lazy
 public class UserProfile {
 
-    @OneToOne(mappedBy = "userProfile")
+    @OneToOne(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private User user;
 
     @Id
     @Column(name = "email")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String email;
 
     @Column(name = "first_name")

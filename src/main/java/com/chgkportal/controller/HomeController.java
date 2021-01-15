@@ -4,6 +4,7 @@ import com.chgkportal.entity.User;
 import com.chgkportal.model.Role;
 import com.chgkportal.model.Status;
 import com.chgkportal.repository.UserRepository;
+import com.chgkportal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 public class HomeController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public HomeController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public HomeController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -31,12 +32,10 @@ public class HomeController {
         return "registration";
     }
 
-    @PostMapping("/createUser")
-    public String addUser(@RequestParam("newUser") User user) {
-        user.setRole(Role.USER);
-        user.setStatus(Status.ACTIVE);
+    @PostMapping("/registration/createUser")
+    public String addUser(@ModelAttribute("newUser") User user) {
 
-        userRepository.save(user);
-        return "main_page";
+        userService.register(user);
+        return "redirect:/";
     }
 }
