@@ -34,7 +34,7 @@ public class UserProfile {
     private String city;
 
     @Column(name = "mac_id")
-    private int macId;
+    private Integer macId;
 
     @Column(name = "vk_link")
     private String vkLink;

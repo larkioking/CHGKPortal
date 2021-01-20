@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @Lazy
 public class User {
 
@@ -20,7 +20,7 @@ public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "email",
             insertable = false,
@@ -37,6 +37,9 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
+
+    @Column(name = "unique_code")
+    private String uniqueCode;
 
     public User() {
     }

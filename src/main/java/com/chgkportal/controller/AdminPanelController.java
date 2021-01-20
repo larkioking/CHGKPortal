@@ -49,6 +49,6 @@ public class AdminPanelController {
     @GetMapping("/userAddForm")
     public String showFormToAddUser(Model model) {
         model.addAttribute("newUser", new User());
-        return "redirect:/registration";
+        return "redirect:/registration/";
     }
 }

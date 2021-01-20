@@ -16,4 +16,6 @@ public interface UserService {
     void register(User user);
 
     void deleteByEmail(String email);
+
+    void activateUser(String code);
 }
