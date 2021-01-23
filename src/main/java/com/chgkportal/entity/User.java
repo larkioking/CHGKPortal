@@ -6,6 +6,8 @@ import lombok.Data;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 @Data
 @Entity
@@ -15,19 +17,23 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "email")
+    @Valid
     private UserProfile userProfile;
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "email",
             insertable = false,
             updatable = false)
+    @Email(message = "Пожалуйста, введите корректный адрес электронной почты")
+    @NotBlank(message = "Пожалуйста, введите адрес электронной почты")
     private String email;
 
     @Column(name = "password")
+    @Size(min = 8, max = 20, message = "Ваш пароль должен быть длиной от 8 до 20 символов")
     private String password;
 
     @Enumerated(value = EnumType.STRING)

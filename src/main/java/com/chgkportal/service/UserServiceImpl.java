@@ -4,7 +4,6 @@ import com.chgkportal.entity.User;
 import com.chgkportal.model.Role;
 import com.chgkportal.model.Status;
 import com.chgkportal.repository.UserRepository;
-import javassist.NotFoundException;
 import org.hibernate.NonUniqueObjectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
