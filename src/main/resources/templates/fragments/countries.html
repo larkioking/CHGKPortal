@@ -3,10 +3,10 @@
 
 <div class="col ui-widget my-3 mb-3" th:fragment="countries">
     <label for="country" class="form-label">Страна</label>
-    <div th:if="${#fields.hasErrors('userProfile.country')}" th:errors="*{userProfile.country}"
+    <div th:if="${#fields.hasErrors('country')}" th:errors="*{country}"
          class="badge badge-danger">Error</div>
     <div id="country">
-        <select th:field="${newUser.userProfile.country}" id="combobox" style="clear: both" >
+        <select th:field="${newUser.country}" id="combobox" style="clear: both" >
             <option value=""></option>
             <option value="AU">Австралия</option>
             <option value="AT">Австрия</option>

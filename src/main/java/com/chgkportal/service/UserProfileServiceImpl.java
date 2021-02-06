@@ -19,7 +19,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public Optional<UserProfile> findAll() {
-        return userProfileRepository.findAllByOrderByLastNameAsc();
+        return userProfileRepository.findAllByOrderByEmail();
     }
 
     @Override

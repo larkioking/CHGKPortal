@@ -14,13 +14,20 @@
 
 </head>
 
-<body>
-<body class="bg-light">
+<body class="bg-white">
 <div th:replace="fragments/header :: header"></div>
-<h1>Hello, world!</h1>
-<h1>Hello, world!</h1>
-<h1>Hello, world!</h1>
+<div class="container-fluid mx-5">
+    <h1>Hello, world!</h1>
+    <h1>Hello, world!</h1>
+
+    <h1>Hello, world!</h1>
+
+    <img sec:authorize="!isFullyAuthenticated()"
+         th:src="@{/avatars/avatar.png}" height="800" width="800">
+
+    <img sec:authorize="isFullyAuthenticated()"
+         th:src="@{/avatars/{filename}(filename = ${#authentication.principal.profilePic})}" height="800" width="800">
+</div>
 <div th:replace="fragments/footer :: footer"></div>
-</body>
 </body>
 </html>

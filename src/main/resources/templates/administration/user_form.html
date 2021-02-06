@@ -16,35 +16,115 @@
 <body class="bg-light">
 
 <div class="container">
-    <h3>User Form</h3>
+    <div th:replace="fragments/header :: header"></div>
+    <h3>Редактирование пользователя</h3>
     <hr>
 
     <form th:action="@{/admin/updateUser}" th:object="${user}" method="POST">
+        <div class="col">
+            <label for="firstName" class="form-label">Имя</label>
 
-        <input type="hidden" th:field="${user.id}">
-        <input type="hidden" th:field="${user.password}">
-        <input type="hidden" th:field="${user.userProfile.email}">
+            <input th:field="${user.firstName}" th:errorclass="is-invalid" type="text"
+                   class="form-control" id="firstName" placeholder="Обязательное поле" required="required">
+        </div>
+
+        <div class="col my-3">
+            <label for="lastName" class="form-label">Фамилия</label>
+
+            <input th:field="${user.lastName}" th:errorclass="is-invalid" type="text"
+                   class="form-control" id="lastName" placeholder="Обязательное поле" required="required">
+        </div>
 
 
-        <input type="text" th:field="${user.email}" class="form-control-plaintext" placeholder="" >
-        <input type="text" th:field="${user.status}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.role}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.lastName}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.firstName}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.macId}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.country}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.city}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.vkLink}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.fbLink}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.tgLink}" class="form-control-plaintext" placeholder="">
-        <input type="text" th:field="${user.userProfile.twLink}" class="form-control-plaintext" placeholder="">
+        <div class="col my-3">
+            <label class="form-check-label mb-1" for="gender">Пол</label>
+            <div id="gender">
+                <div class="form-check form-check-inline">
+                    <input th:field="${user.gender}" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="man" checked="checked">
+                    <label class="form-check-label" for="inlineRadio1">Мужчина</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input th:field="${user.gender}" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="wom">
+                    <label class="form-check-label" for="inlineRadio2">Женщина</label>
+                </div>
+            </div>
+        </div>
 
-        <button type="submit" class="btn btn-info">Save</button>
+        <div class="col my-3">
+            <label for="city" class="form-label">Город</label>
+
+
+            <input th:field="${user.city}" th:errorclass="is-invalid"
+                   type="text" class="form-control" id="city" placeholder="Обязательное поле" value="">
+
+        </div>
+
+        <div class="col my-3">
+            <label for="example-date-input" class="form-label">День рождения</label>
+            <input th:field="${user.birthDate}" th:errorclass="is-invalid"
+                   class="form-control" type="date" id="example-date-input">
+        </div>
+
+        <div class="col my-3">
+            <label for="macID" class="form-label">MAC ID</label>
+
+
+            <input th:field="${user.macId}" th:errorclass="is-invalid"
+                   type="number" class="form-control" id="macID" placeholder="Ваш идентификатор МАК" value="">
+        </div>
+
+
+        <div class="col my-3">
+            <label for="social" class="col-form-label">Социальные сети</label>
+            <div class="input-group my-1" id="social">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">vk.com/</span>
+                </div>
+
+                <input th:field="${user.userProfile.vkLink}" type="text" class="form-control" id="vk" placeholder="vkID">
+                <div class="invalid-feedback" style="width: 100%;">
+                    Пожалуйста ,проверьте правильность введённого ID.
+                </div>
+            </div>
+
+            <div class="input-group my-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">tg.me/</span>
+                </div>
+                <input th:field="${user.userProfile.tgLink}" type="text" class="form-control" id="tg" placeholder="tgID">
+                <div class="invalid-feedback" style="width: 100%;">
+                    Пожалуйста ,проверьте правильность введённого ID.
+                </div>
+            </div>
+
+            <div class="input-group my-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">facebook.com/</span>
+                </div>
+                <input th:field="${user.userProfile.fbLink}" type="text" class="form-control" id="fb" placeholder="fbID">
+                <div class="invalid-feedback" style="width: 100%;">
+                    Пожалуйста ,проверьте правильность введённого ID.
+                </div>
+            </div>
+            <div class="input-group my-1 mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">twitter.com/</span>
+                </div>
+                <input th:field="${user.userProfile.twLink}" type="text" class="form-control" id="tw" placeholder="twID">
+                <div class="invalid-feedback" style="width: 100%;">
+                    Пожалуйста, проверьте правильность введённого ID.
+                </div>
+            </div>
+
+        </div>
+
+
+        <button class="btn btn-primary" type="submit">Сохранить пользователя</button>
     </form>
 
     <hr>
     <a th:href="@{/admin/users}">Back to Users</a>
 </div>
-
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

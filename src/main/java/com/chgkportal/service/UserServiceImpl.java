@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
             throw new NonUniqueObjectException(user.getId(), user.getEmail());
         }
 
-        user.setRole(Role.USER);
+        user.setRole(Role.ROLE_USER);
         user.setStatus(Status.NOT_CONFIRMED);
         user.getUserProfile().setEmail(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
                 "Здравствуйте, %s! \n" +
                         "Для завершения регистрации перейдите по следующей ссылке: \n" +
                         "http://localhost:8080/registration/activate/%s",
-                user.getUserProfile().getFirstName(),
+                user.getFirstName(),
                 user.getUniqueCode()
         );
 

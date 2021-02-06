@@ -29,6 +29,7 @@
                     <th class="col">Status</th>
                     <th class="col">First Name</th>
                     <th class="col">Last Name</th>
+                    <th class="col">Middle Name</th>
                     <th class="col">Gender</th>
                     <th class="col">Country</th>
                     <th class="col">City</th>
@@ -48,12 +49,13 @@
                 <td th:text="${tempUser.getRole()}"></td>
                 <td th:text="${tempUser.getRole().getPermissions()}"></td>
                 <td th:text="${tempUser.getStatus()}"></td>
-                <td th:text="${tempUser.getUserProfile().getFirstName()}"></td>
-                <td th:text="${tempUser.getUserProfile().getLastName()}"></td>
-                <td th:text="${tempUser.getUserProfile().getGender()}"></td>
-                <td th:text="${tempUser.getUserProfile().country}"></td>
-                <td th:text="${tempUser.getUserProfile().getCity()}"></td>
-                <td th:text="${tempUser.getUserProfile().getMacId()}"></td>
+                <td th:text="${tempUser.getFirstName()}"></td>
+                <td th:text="${tempUser.getLastName()}"></td>
+                <td th:text="${tempUser.getMiddleName()}"></td>
+                <td th:text="${tempUser.getGender()}"></td>
+                <td th:text="${tempUser.country}"></td>
+                <td th:text="${tempUser.getCity()}"></td>
+                <td th:text="${tempUser.getMacId()}"></td>
                 <td th:text="${tempUser.getUserProfile().getVkLink()}"></td>
                 <td th:text="${tempUser.getUserProfile().getFbLink()}"></td>
                 <td th:text="${tempUser.getUserProfile().getTwLink()}"></td>

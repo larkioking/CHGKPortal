@@ -1,76 +1,37 @@
 package com.chgkportal.security;
 
-import com.chgkportal.entity.User;
-import com.chgkportal.model.Status;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
-import java.util.List;
 
-public class SecurityUser implements UserDetails {
+public class SecurityUser extends User {
 
-    private final String username;
-    private final String password;
+    private String profilePic;
+    private String firstName;
 
-    private final List<SimpleGrantedAuthority> authorities;
-    private final boolean isActive;
+    public SecurityUser(String username, String password, boolean enabled,
+                        boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked,
+                        Collection<? extends GrantedAuthority> authorities, String profilePic, String firstName) {
 
-    public SecurityUser(String username, String password, List<SimpleGrantedAuthority> authorities, boolean isActive) {
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-        this.isActive = isActive;
+        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+        this.profilePic = profilePic;
+        this.firstName = firstName;
     }
 
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+    public String getProfilePic() {
+        return profilePic;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return isActive;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return isActive;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return isActive;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return isActive;
-    }
-
-
-    public static UserDetails fromUser(User user) {
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getRole().getAuthorities()
-        );
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }

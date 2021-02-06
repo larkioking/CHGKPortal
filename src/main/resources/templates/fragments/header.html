@@ -5,51 +5,53 @@
 
     <div class="container-fluid">
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarToggler">
-            <a class="navbar-brand" href="#">Hidden brand</a>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <a class="navbar-brand" href="#">Hidden brand</a>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
 
-                <div class="dropdown" sec:authorize="${hasAuthority('adminpanel:crud')}">
-                    <button type="button" class="btn btn-light dropdown-toggle" id="navBarAdminPanelLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Administration
-                    </button>
+                    <div class="dropdown" sec:authorize="${hasAuthority('adminpanel:crud')}">
+                        <button type="button" class="btn btn-light dropdown-toggle" id="navBarAdminPanelLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administration
+                        </button>
 
-                    <div class="dropdown-menu" aria-labelledby="navBarAdminPanelLink">
-                        <a class="dropdown-item" href="/admin/users">Users</a>
+                        <div class="dropdown-menu" aria-labelledby="navBarAdminPanelLink">
+                            <a class="dropdown-item" href="/admin/users">Users</a>
+                        </div>
                     </div>
-                </div>
 
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        Dropdown link
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            Dropdown link
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
 
-            <!-- Logging menu !-->
-            <div class="dropdown" sec:authorize="!isFullyAuthenticated()">
-                <button type="button" class="btn btn-light dropdown-toggle" id="navBarLoginMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Authorization
+                <!-- Logging menu !-->
+            </div>
+
+            <div class="dropdown align-self-end justify-content-end" sec:authorize="!isFullyAuthenticated()">
+                <button type="button" class="btn btn-light dropdown-toggle mr-5" id="navBarLoginMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Вход/Регистрация
                 </button>
 
-                <div class="dropdown-menu">
+                <div class="dropdown-menu dropdown-menu-lg-right mr-5">
                     <form th:action="@{/}" method="POST" class="px-4 py-3">
                         <div th:if="${param.error}" class="alert alert-warning">
                             Invalid username/password!
@@ -79,11 +81,39 @@
 
 
             <div sec:authorize="isFullyAuthenticated()">
-                <form th:action="@{/logout}" method="POST">
-                    <button type="submit" class="btn btn-light">Logout</button>
-                </form>
+                <div class="container">
+                    <!-- " !-->
+
+
+                    <div class="dropdown">
+
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img
+                                    th:src="@{/avatars/{filename}(filename = ${#authentication.principal.profilePic})}"
+                                    class="nav-item rounded-circle mr-1"
+                                    alt="avatar image"
+                                    height="40"
+                                    width="40"
+                            />
+                            <span th:text="${#authentication.principal.firstName}"></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/account/">Настройки профиля</a>
+                            <div class="dropdown-divider"></div>
+                            <form th:action="@{/logout}" method="POST" name="logout" id="logout">
+                                <!--<button type="submit" class="btn btn-light btn-block">Logout</button>!-->
+                                <a href="javascript:" class="dropdown-item"
+                                   onclick="document.getElementById('logout').submit();">Выйти из аккаунта</a>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
             </div>
-        </div>
     </div>
 </nav>
 
